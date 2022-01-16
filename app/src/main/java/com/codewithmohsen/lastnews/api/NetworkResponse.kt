@@ -10,12 +10,12 @@ sealed class NetworkResponse<out T: Any, out E: APIErrorResponse<ErrorModel>> {
     data class Success<T: Any>(val body: T) : NetworkResponse<T, Nothing>()
 
     /**
-     * Success response with body
+     * Success response without body
      */
     data class Empty<T: Any>(val body: T?) : NetworkResponse<T, Nothing>()
 
     /**
-     * Failure response with body
+     * Failure response, API error
      */
     data class APIError<E: APIErrorResponse<ErrorModel>>(val apiErrorResponse: E) : NetworkResponse<Nothing, E>()
 

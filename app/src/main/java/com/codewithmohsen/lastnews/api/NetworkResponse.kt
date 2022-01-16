@@ -1,9 +1,8 @@
 package com.codewithmohsen.lastnews.api
 
 import java.io.IOException
-import java.net.ProtocolException
 
-sealed class NetworkResponse<out T: Any, out E: APIErrorResponse<ErrorBody>> {
+sealed class NetworkResponse<out T: Any, out E: APIErrorResponse<ErrorModel>> {
 
     /**
      * Success response with body
@@ -18,7 +17,7 @@ sealed class NetworkResponse<out T: Any, out E: APIErrorResponse<ErrorBody>> {
     /**
      * Failure response with body
      */
-    data class APIError<E: APIErrorResponse<ErrorBody>>(val apiErrorResponse: E) : NetworkResponse<Nothing, E>()
+    data class APIError<E: APIErrorResponse<ErrorModel>>(val apiErrorResponse: E) : NetworkResponse<Nothing, E>()
 
     /**
      * Network error

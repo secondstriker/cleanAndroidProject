@@ -9,20 +9,20 @@ import java.io.IOException
 import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
-class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorBody>>(
+class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
     private val successType: Type,
-    private val errorBodyConverter: Converter<ResponseBody, ErrorBody>
+    private val errorModelConverter: Converter<ResponseBody, ErrorModel>
 ) : CallAdapter<S, Call<NetworkResponse<S, E>>> {
 
     override fun responseType(): Type = successType
 
     override fun adapt(call: Call<S>): Call<NetworkResponse<S, E>> {
-        return NetworkResponseCall(call, errorBodyConverter)
+        return NetworkResponseCall(call, errorModelConverter)
     }
 
-    internal class NetworkResponseCall<S : Any, E : APIErrorResponse<ErrorBody>>(
+    internal class NetworkResponseCall<S : Any, E : APIErrorResponse<ErrorModel>>(
         private val delegate: Call<S>,
-        private val errorConverter: Converter<ResponseBody, ErrorBody>
+        private val errorConverter: Converter<ResponseBody, ErrorModel>
     ) : Call<NetworkResponse<S, E>> {
 
         override fun enqueue(callback: Callback<NetworkResponse<S, E>>) {
@@ -62,7 +62,7 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorBody>>(
                                 NetworkResponse.APIError(
                                     createApiErrorResponse(
                                         code,
-                                        errorBody ?: ErrorBody(ERROR_MESSAGE_IS_NULL)
+                                        errorBody ?: ErrorModel(ERROR_STATUS, ERROR_CODE, ERROR_MESSAGE)
                                     )
                                 )
                                         as NetworkResponse<S, E>
@@ -84,20 +84,20 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorBody>>(
 
         private fun createApiErrorResponse(
             code: Int,
-            errorBody: ErrorBody
-        ): APIErrorResponse<ErrorBody> {
+            errorModel: ErrorModel
+        ): APIErrorResponse<ErrorModel> {
             return when (code) {
-                401 -> APIErrorResponse.Unauthenticated(errorBody)
-                in 400..499 -> APIErrorResponse.ClientErrorResponse(errorBody)
-                in 500..599 -> APIErrorResponse.ServerErrorResponse(errorBody)
-                else -> APIErrorResponse.UnexpectedErrorResponse(errorBody)
+                401 -> APIErrorResponse.Unauthenticated(errorModel)
+                in 400..499 -> APIErrorResponse.ClientErrorResponse(errorModel)
+                in 500..599 -> APIErrorResponse.ServerErrorResponse(errorModel)
+                else -> APIErrorResponse.UnexpectedErrorResponse(errorModel)
             }
         }
 
         /**
          * We use Kotlin reflection for converting ResponseBody to ErrorBody.
          */
-        private fun convertToErrorBody(error: ResponseBody?): ErrorBody? {
+        private fun convertToErrorBody(error: ResponseBody?): ErrorModel? {
             return when {
                 error == null -> null
                 error.contentLength() == 0L -> null
@@ -130,6 +130,8 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorBody>>(
     }
 
     companion object {
-        const val ERROR_MESSAGE_IS_NULL = "Something went wrong."
+        const val ERROR_STATUS = "No status"
+        const val ERROR_CODE = "No code"
+        const val ERROR_MESSAGE = "No message"
     }
 }

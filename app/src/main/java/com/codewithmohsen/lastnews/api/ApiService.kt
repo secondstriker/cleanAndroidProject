@@ -11,5 +11,5 @@ interface ApiService {
      * fetch news
      */
     @GET("top-headlines?country=us&category=general&page=1")
-    suspend fun fetchNews(): NetworkResponse<ResponseModel, APIErrorResponse<ErrorBody>>
+    suspend fun fetchNews(): NetworkResponse<ResponseModel, APIErrorResponse<ErrorModel>>
 }

@@ -6,4 +6,7 @@ object Constants {
     const val REQUEST_TIMEOUT_IN_SECONDS = 10L
     const val READ_TIMEOUT_IN_SECONDS = 10L
     const val CONNECT_TIMEOUT_IN_SECONDS = 10L
+
+    const val COUNTRY = "us"
+    const val PAGE_SIZE = 20
 }

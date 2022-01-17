@@ -7,6 +7,7 @@ import com.codewithmohsen.lastnews.api.NetworkResponse
 import com.codewithmohsen.lastnews.di.CoroutinesScopesModule.ApplicationScope
 import com.codewithmohsen.lastnews.di.IoDispatcher
 import com.codewithmohsen.lastnews.models.Article
+import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.models.ResponseModel
 import com.codewithmohsen.lastnews.repository.BaseOnlineRepository
 import com.codewithmohsen.lastnews.repository.Resource
@@ -24,15 +25,20 @@ class NewsListRepositoryImpl @Inject constructor(
 ): BaseOnlineRepository<ResponseModel, List<Article>>(externalCoroutineDispatcher, ioDispatcher),
     NewsListRepository {
 
-    override suspend fun fetchNews() = withContext(ioDispatcher) {
-        super.fetch()
+    private var page: Int? = null
+    private var category: Category? = null
+
+    override suspend fun fetchNews(category: Category, page: Int) {
+        this.category = category
+        this.page = page
+        withContext(ioDispatcher) { super.fetch() }
     }
 
     override val news: Flow<Resource<List<Article>>>
         get() = super.getResultAsFlow()
 
     override suspend fun apiCall(): NetworkResponse<ResponseModel, APIErrorResponse<ErrorModel>> =
-        apiService.fetchNews()
+        apiService.fetchNews(category = category!!.name, page = page!!)
 
     override suspend fun bodyToResult(apiModel: ResponseModel?): List<Article> =
         apiModel?.articles ?: mutableListOf()

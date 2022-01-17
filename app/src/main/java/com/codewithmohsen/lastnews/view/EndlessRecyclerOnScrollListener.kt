@@ -2,7 +2,6 @@ package com.codewithmohsen.lastnews.view
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
 
 
 abstract class EndlessRecyclerOnScrollListener(
@@ -20,14 +19,12 @@ abstract class EndlessRecyclerOnScrollListener(
         visibleItemCount = recyclerView.childCount
         totalItemCount = layoutManager.itemCount
         firstVisibleItem = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-        Timber.d("beforeLoading $loading $totalItemCount $previousTotal")
         if (loading) {
             if (totalItemCount > previousTotal || previousTotal > totalItemCount) {
                 loading = false
                 previousTotal = totalItemCount
             }
         }
-        Timber.d("afterLoading $loading $totalItemCount $previousTotal")
         if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
             onLoadMore()
             loading = true

@@ -21,6 +21,7 @@ import com.codewithmohsen.lastnews.binding.ActivityDataBindingComponent
 import com.codewithmohsen.lastnews.databinding.ActivityMainBinding
 import com.codewithmohsen.lastnews.databinding.BottomSheetSelectCategoryBinding
 import com.codewithmohsen.lastnews.models.Category
+import com.codewithmohsen.lastnews.repository.Status
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.flow.collect
@@ -56,6 +57,9 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getNewsAsFlow().collect { resource ->
                     adapter.submitList(resource.data)
                     binding.status = resource.status
+                    if(binding.swipeRefresh.isRefreshing)
+                        binding.swipeRefresh.isRefreshing = Status.LOADING == resource.status
+                            || Status.LONG_LOADING == resource.status
                 }
             }
         }
@@ -69,6 +73,14 @@ class MainActivity : AppCompatActivity() {
                 viewModel.fetchMoreNews()
             }
         })
+
+        binding.cancelContainer.cancelButton.setOnClickListener {
+            viewModel.cancel()
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refresh()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

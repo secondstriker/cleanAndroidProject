@@ -1,5 +1,7 @@
 package com.codewithmohsen.lastnews.vm
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codewithmohsen.lastnews.models.Category
@@ -17,6 +19,12 @@ class NewsListViewModel @Inject constructor(
 
     private var job: Job = Job()
 
+    private val selectedCategory = MutableLiveData<Int>()
+    fun getSelectedCategory(): LiveData<Int> = selectedCategory
+    fun setSelectedCategory(category: Int) {
+        selectedCategory.value = category
+    }
+
     fun fetchNews() {
         newJob()
         viewModelScope.launch(job) {
@@ -28,7 +36,7 @@ class NewsListViewModel @Inject constructor(
         newJob()
         repo.setCategory(category)
         viewModelScope.launch(job) {
-            repo.fetchMoreNews()
+            repo.refresh()
         }
     }
 

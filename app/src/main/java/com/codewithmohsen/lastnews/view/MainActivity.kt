@@ -2,6 +2,8 @@ package com.codewithmohsen.lastnews.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingComponent
 import androidx.lifecycle.Lifecycle
@@ -11,13 +13,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.adapter.ItemListAdapter
 import com.codewithmohsen.lastnews.binding.ActivityDataBindingComponent
 import com.codewithmohsen.lastnews.databinding.ActivityMainBinding
+import com.codewithmohsen.lastnews.databinding.BottomSheetSelectCategoryBinding
 import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
@@ -65,4 +70,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                SelectCategoryDialogFragment.newInstance().show(supportFragmentManager, this::class.java.name)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

@@ -76,5 +76,7 @@ class DependenciesPlugin : Plugin<Project> {
         const val MaterialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.6.1"
         //elasticview
         const val ElasticView = "com.github.armcha:ElasticView:0.2.0"
+        //SwipeRefreshLayout
+        const val SwipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
     }
 }

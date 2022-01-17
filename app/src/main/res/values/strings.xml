@@ -3,4 +3,13 @@
     <string name="image_of_the_article_or_news">image of the article or news</string>
     <string name="title">Title</string>
     <string name="retry">Retry</string>
+    <string name="filter">Filter</string>
+    <string name="general">General</string>
+    <string name="all">All</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
 </resources>

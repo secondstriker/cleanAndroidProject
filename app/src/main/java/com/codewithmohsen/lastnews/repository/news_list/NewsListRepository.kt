@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsListRepository {
 
-    suspend fun fetchNews(category: Category, page: Int)
+    suspend fun fetchMoreNews()
+    fun setCategory(category: Category)
+    suspend fun refresh()
     val news: Flow<Resource<List<Article>>>
 }

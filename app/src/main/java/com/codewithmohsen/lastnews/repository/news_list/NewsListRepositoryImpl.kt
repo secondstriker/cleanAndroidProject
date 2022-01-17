@@ -9,7 +9,6 @@ import com.codewithmohsen.lastnews.di.IoDispatcher
 import com.codewithmohsen.lastnews.models.Article
 import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.models.ResponseModel
-import com.codewithmohsen.lastnews.repository.BaseOnlineRepository
 import com.codewithmohsen.lastnews.repository.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -22,24 +21,21 @@ class NewsListRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     @ApplicationScope private val externalCoroutineDispatcher: CoroutineScope
-): BaseOnlineRepository<ResponseModel, List<Article>>(externalCoroutineDispatcher, ioDispatcher),
+): PaginationNewsRepository(externalCoroutineDispatcher, ioDispatcher),
     NewsListRepository {
 
-    private var page: Int? = null
-    private var category: Category? = null
+    private lateinit var category: Category
 
-    override suspend fun fetchNews(category: Category, page: Int) {
-        this.category = category
-        this.page = page
-        withContext(ioDispatcher) { super.fetch() }
+    override suspend fun fetchMoreNews() = withContext(ioDispatcher) { super.fetch(false) }
+    override fun setCategory(category: Category) { this.category = category }
+    override suspend fun refresh() {
+        super.reset()
+        super.fetch(true)
     }
 
     override val news: Flow<Resource<List<Article>>>
         get() = super.getResultAsFlow()
 
     override suspend fun apiCall(): NetworkResponse<ResponseModel, APIErrorResponse<ErrorModel>> =
-        apiService.fetchNews(category = category!!.name, page = page!!)
-
-    override suspend fun bodyToResult(apiModel: ResponseModel?): List<Article> =
-        apiModel?.articles ?: mutableListOf()
+        apiService.fetchNews(category = category.name, page = super.page)
 }

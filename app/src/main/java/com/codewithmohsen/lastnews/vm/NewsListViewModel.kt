@@ -12,16 +12,30 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsListViewModel @Inject constructor(
     private val repo: NewsListRepository
-): ViewModel() {
+) : ViewModel() {
 
 
-    private val job = Job()
+    private var job: Job = Job()
 
-    fun fetchNews() = fetchNews(Category.general, 1)
-
-    fun fetchNews(category: Category, page: Int) {
+    fun fetchNews() {
+        newJob()
         viewModelScope.launch(job) {
-            repo.fetchNews(category, page)
+            repo.fetchMoreNews()
+        }
+    }
+
+    fun fetchNews(category: Category) {
+        newJob()
+        repo.setCategory(category)
+        viewModelScope.launch(job) {
+            repo.fetchMoreNews()
+        }
+    }
+
+    fun refresh() {
+        newJob()
+        viewModelScope.launch(job) {
+            repo.refresh()
         }
     }
 
@@ -30,4 +44,12 @@ class NewsListViewModel @Inject constructor(
     fun cancel() {
         job.cancel()
     }
+
+    private fun newJob() {
+        if (job.isActive) {
+            job.cancel()
+            job = Job()
+        }
+    }
+
 }

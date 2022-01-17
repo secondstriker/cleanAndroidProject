@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews
+package com.codewithmohsen.lastnews.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,12 +12,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.adapter.ItemListAdapter
 import com.codewithmohsen.lastnews.binding.ActivityDataBindingComponent
 import com.codewithmohsen.lastnews.databinding.ActivityMainBinding
+import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -53,6 +55,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.fetchNews()
+        viewModel.fetchNews(category = Category.general)
+
+        binding.itemList.addOnScrollListener(object :
+            EndlessRecyclerOnScrollListener(binding.itemList.layoutManager!!,0){
+            override fun onLoadMore() {
+                Timber.d("MainActivity fetch more")
+                viewModel.fetchNews()
+            }
+        })
     }
 }

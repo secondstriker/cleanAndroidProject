@@ -8,5 +8,5 @@ object Constants {
     const val CONNECT_TIMEOUT_IN_SECONDS = 10L
 
     const val COUNTRY = "us"
-    const val PAGE_SIZE = 20
+    const val PAGE_SIZE = 6
 }

@@ -8,6 +8,7 @@ import com.codewithmohsen.lastnews.di.CoroutinesScopesModule.ApplicationScope
 import com.codewithmohsen.lastnews.di.IoDispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import timber.log.Timber
 
 abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
     @ApplicationScope private val externalCoroutineScope: CoroutineScope,
@@ -16,9 +17,9 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
 
     private val _result = MutableStateFlow<Resource<ResultModel>>(Resource.loading(null))
 
-    protected suspend fun fetch(): Unit = withContext(ioDispatcher) {
+    protected suspend fun fetch(refresh: Boolean): Unit = withContext(ioDispatcher) {
 
-        val apiJob = async(ioDispatcher) { getData() }
+        val apiJob = async(ioDispatcher) { getData(refresh) }
         val longLoadingJob = async(ioDispatcher) { longLoading() }
 
         apiJob.await()
@@ -35,8 +36,12 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
          }
     }
 
-    private suspend fun getData() {
-        setValue(Resource.loading(_result.value.data))
+    private suspend fun getData(refresh: Boolean) {
+        Timber.d("BaseOnlineRepository getData")
+        if(refresh)
+            setValue(Resource.loading(null))
+        else
+            setValue(Resource.loading(_result.value.data))
 
         when (val result = apiCall()) {
             is NetworkResponse.APIError -> {
@@ -98,6 +103,6 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
     }
 
     protected open fun getResultAsFlow() = _result.asStateFlow()
-    abstract suspend fun apiCall(): NetworkResponse<ApiModel,  APIErrorResponse<ErrorModel>>
-    abstract suspend fun bodyToResult(apiModel: ApiModel?): ResultModel
+    protected abstract suspend fun apiCall(): NetworkResponse<ApiModel,  APIErrorResponse<ErrorModel>>
+    protected abstract suspend fun bodyToResult(apiModel: ApiModel?): ResultModel
 }

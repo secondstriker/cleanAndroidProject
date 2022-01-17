@@ -4,12 +4,14 @@ import com.codewithmohsen.lastnews.Config.LONG_LOADING_THRESHOLD
 import com.codewithmohsen.lastnews.api.APIErrorResponse
 import com.codewithmohsen.lastnews.api.ErrorModel
 import com.codewithmohsen.lastnews.api.NetworkResponse
+import com.codewithmohsen.lastnews.di.CoroutinesScopesModule.ApplicationScope
+import com.codewithmohsen.lastnews.di.IoDispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any> constructor(
-    private val externalCoroutineScope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
+    @ApplicationScope private val externalCoroutineScope: CoroutineScope,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
 
     private val _result = MutableStateFlow<Resource<ResultModel>>(Resource.loading(null))

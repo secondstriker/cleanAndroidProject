@@ -12,7 +12,7 @@ class DependenciesPlugin : Plugin<Project> {
 
         const val TargetSdk = 31
         const val CompileSdk = 31
-        const val MinSdk = 19
+        const val MinSdk = 21
 
         const val AndroidxCore = "androidx.core:core-ktx:1.6.0"
         const val AndroidxAppCompat = "androidx.appcompat:appcompat:1.3.1"
@@ -67,5 +67,14 @@ class DependenciesPlugin : Plugin<Project> {
 
         const val Glide = "com.github.bumptech.glide:glide:4.12.0"
         const val GlideKtx = "com.github.bumptech.glide:compiler:4.12.0"
+
+        //lifecycle Extensions
+        const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+        const val ViewModelRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+
+        //material progressbar
+        const val MaterialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.6.1"
+        //elasticview
+        const val ElasticView = "com.github.armcha:ElasticView:0.2.0"
     }
 }

@@ -77,4 +77,12 @@ dependencies {
     kaptAndroidTest(DependenciesPlugin.HiltAndroidCompiler)
 
     implementation(DependenciesPlugin.MultiDexApplication)
+
+    implementation(DependenciesPlugin.MaterialProgressBar)
+    implementation(DependenciesPlugin.ElasticView)
+
+    implementation(DependenciesPlugin.ViewModelRuntimeKtx)
+    implementation(DependenciesPlugin.lifecycleViewModelKtx)
+    implementation(DependenciesPlugin.Glide)
+    kapt(DependenciesPlugin.GlideKtx)
 }

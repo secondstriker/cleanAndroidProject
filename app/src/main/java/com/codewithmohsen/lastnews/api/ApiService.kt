@@ -10,6 +10,6 @@ interface ApiService {
     /**
      * fetch news
      */
-    @GET("top-headlines?country=us&category=general&page=1")
+    @GET("top-headlines?country=us&category=health&page=1&apikey=4803e6b0c58d42cead1a86a6727cb49b")
     suspend fun fetchNews(): NetworkResponse<ResponseModel, APIErrorResponse<ErrorModel>>
 }

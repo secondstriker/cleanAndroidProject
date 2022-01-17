@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             EndlessRecyclerOnScrollListener(binding.itemList.layoutManager!!,0){
             override fun onLoadMore() {
                 Timber.d("MainActivity fetch more")
-                viewModel.fetchNews()
+                viewModel.fetchMoreNews()
             }
         })
     }

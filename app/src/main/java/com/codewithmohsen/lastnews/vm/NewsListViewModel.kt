@@ -25,7 +25,7 @@ class NewsListViewModel @Inject constructor(
         selectedCategory.value = category
     }
 
-    fun fetchNews() {
+    fun fetchMoreNews() {
         newJob()
         viewModelScope.launch(job) {
             repo.fetchMoreNews()

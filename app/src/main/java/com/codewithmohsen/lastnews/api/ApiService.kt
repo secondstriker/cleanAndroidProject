@@ -11,7 +11,7 @@ interface ApiService {
     /**
      * fetch news
      */
-    @Headers("X-Api-Key:4803e6b0c58d42cead1a86a6727cb49b")
+    @Headers("X-Api-Key:2af6a4552d8c48a6a126cf6c876a3795")
     @GET("top-headlines")
     suspend fun fetchNews(
         @Query("pageSize") pageSize: Int = PAGE_SIZE,

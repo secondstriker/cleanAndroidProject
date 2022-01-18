@@ -8,7 +8,9 @@ import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.repository.news_list.NewsListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,8 +18,7 @@ class NewsListViewModel @Inject constructor(
     private val repo: NewsListRepository
 ) : ViewModel() {
 
-
-    private var job: Job = Job()
+    private lateinit var job: Job
 
     private val selectedCategory = MutableLiveData<Int>()
     fun getSelectedCategory(): LiveData<Int> = selectedCategory
@@ -51,12 +52,18 @@ class NewsListViewModel @Inject constructor(
 
     fun cancel() {
         job.cancel()
+        Timber.d("viewModel cancel")
     }
 
     private fun newJob() {
-        if (job.isActive) {
+        if(!this::job.isInitialized)
+            job = Job()
+        if (job.isActive || job.isCancelled) {
             job.cancel()
             job = Job()
+            job.invokeOnCompletion {
+                Timber.d("viewModel job completed. is cancelled? ${job.isCancelled}")
+            }
         }
     }
 

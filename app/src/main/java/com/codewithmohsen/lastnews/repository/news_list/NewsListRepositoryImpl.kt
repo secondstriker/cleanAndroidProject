@@ -10,11 +10,8 @@ import com.codewithmohsen.lastnews.models.Article
 import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.models.ResponseModel
 import com.codewithmohsen.lastnews.repository.Resource
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NewsListRepositoryImpl @Inject constructor(
@@ -26,7 +23,7 @@ class NewsListRepositoryImpl @Inject constructor(
 
     private lateinit var category: Category
 
-    override suspend fun fetchMoreNews() = withContext(ioDispatcher) { super.fetch(false) }
+    override suspend fun fetchMoreNews() { super.fetch(false) }
     override fun setCategory(category: Category) { this.category = category }
     override suspend fun refresh() {
         super.reset()

@@ -9,6 +9,7 @@ import com.codewithmohsen.lastnews.di.IoDispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
+import kotlin.coroutines.coroutineContext
 
 abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
     @ApplicationScope private val externalCoroutineScope: CoroutineScope,
@@ -17,27 +18,29 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
 
     private val _result = MutableStateFlow<Resource<ResultModel>>(Resource.loading(null))
 
-    protected suspend fun fetch(refresh: Boolean): Unit = withContext(ioDispatcher) {
+    protected suspend fun fetch(refresh: Boolean) = withContext(ioDispatcher) {
 
-        val apiJob = async(ioDispatcher) { getData(refresh) }
-        val longLoadingJob = async(ioDispatcher) { longLoading() }
-
-        apiJob.await()
-        longLoadingJob.await()
+        val apiJob = launch(ioDispatcher) { getData(refresh) }
+        val longLoadingJob = launch(ioDispatcher) { longLoading() }
          apiJob.invokeOnCompletion { cause ->
-             if (longLoadingJob.isActive)
+             Timber.d("invokeOnCompletion")
+             if (longLoadingJob.isActive) {
+                 Timber.d("invokeOnCompletion long loading is cancelled.")
                  longLoadingJob.cancel()
+             }
              if(apiJob.isCancelled) {
+                 Timber.d("invokeOnCompletion main job is cancelled.")
                  externalCoroutineScope.launch(ioDispatcher) {
                      setValue(Resource.cancel(_result.value.data))
                  }
              }
              //We can do anything with our externalCoroutineScope here for example analytics
          }
+        listOf(apiJob, longLoadingJob).joinAll()
     }
 
     private suspend fun getData(refresh: Boolean) {
-        Timber.d("BaseOnlineRepository getData")
+        Timber.d("getData")
         if(refresh)
             setValue(Resource.loading(null))
         else

@@ -5,7 +5,7 @@
 
     <data>
 
-<!--        <import type="com.codewithmohsen.lastnews.models.Source"/>-->
+        <import type="com.codewithmohsen.lastnews.utils.Converters"/>
 
         <variable
             name="item"
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.publishedAt}"
+                android:text="@{Converters.dateTimeToRequiredFormatForList(item.publishedAt)}"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="15sp"
                 android:lines="1"

@@ -5,6 +5,8 @@
 
     <data>
 
+<!--        <import type="com.codewithmohsen.lastnews.models.Source"/>-->
+
         <variable
             name="item"
             type="com.codewithmohsen.lastnews.models.Article" />
@@ -30,7 +32,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
                 android:scaleType="centerCrop"
@@ -39,49 +41,42 @@
                 android:background="@color/cardview_shadow_end_color"
                 android:contentDescription="@string/image_of_the_article_or_news" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.source.name}"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="15sp"
+                android:lines="1"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.publishedAt}"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="15sp"
+                android:lines="1"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
-                    android:lines="2"
+                    android:lines="3"
                     android:text="@{item.title}"
-                    android:textColor="@color/primaryTextColor"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:singleLine="true"
-                    android:text="@{item.publishedAt}"
                     android:textColor="@color/secondaryTextColor"
+                    android:layout_marginBottom="@dimen/default_margin"
                     android:textSize="14sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-<!--        <androidx.appcompat.widget.AppCompatImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@{item.type == @string/game ? @drawable/ic_game : (item.type == @string/series ? @drawable/ic_series : @drawable/ic_movie)}"-->
-<!--            android:layout_gravity="bottom|end"-->
-<!--            android:layout_marginBottom="@dimen/default_margin"-->
-<!--            android:layout_marginEnd="@dimen/default_margin"-->
-<!--            />-->
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{item.description}"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="14sp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            />
-
     </io.armcha.elasticview.ElasticView>
 </layout>

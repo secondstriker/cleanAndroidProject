@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/bottomsheet_background.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.2171875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_broken_image_24.xml" value="0.1078125" />
         <entry key="app/src/main/res/drawable/ic_drag_handle.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10960144927536232" />
         <entry key="app/src/main/res/layout/bottom_sheet_select_category.xml" value="0.1" />

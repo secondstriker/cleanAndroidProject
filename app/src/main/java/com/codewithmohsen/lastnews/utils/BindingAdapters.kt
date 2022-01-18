@@ -3,17 +3,18 @@ package com.codewithmohsen.lastnews.utils
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestListener
-import com.codewithmohsen.lastnews.repository.Status
+import com.codewithmohsen.lastnews.R
 
 object BindingAdapters {
 
     @JvmStatic
-    @BindingAdapter(value = ["imageUrl", "placeHolder", "imageRequestListener"], requireAll = false)
-    fun bindImage(imageView: ImageView, url: String?, placeHolder: Drawable?, listener: RequestListener<Drawable?>?) {
+    @BindingAdapter(value = ["imageUrl", "imageRequestListener"], requireAll = false)
+    fun bindImage(imageView: ImageView, url: String?, listener: RequestListener<Drawable?>?) {
         Glide.with(imageView).load(url)
-            .placeholder(placeHolder).listener(listener).into(imageView)
+            .placeholder(R.drawable.ic_baseline_image_24)
+            .error(R.drawable.ic_baseline_broken_image_24)
+            .listener(listener).into(imageView)
     }
 }

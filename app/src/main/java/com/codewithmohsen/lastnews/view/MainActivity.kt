@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        adapter = ItemListAdapter() { item ->
+        adapter = ItemListAdapter { item ->
 
         }
 
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         binding.itemList.addOnScrollListener(object :
             EndlessRecyclerOnScrollListener(binding.itemList.layoutManager!!,0){
             override fun onLoadMore() {
-                Timber.d("MainActivity fetch more")
+                Timber.d("fetch more")
                 viewModel.fetchMoreNews()
             }
         })

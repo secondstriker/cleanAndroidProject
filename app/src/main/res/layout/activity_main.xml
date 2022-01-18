@@ -55,7 +55,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:status="@{status}" />
 
-
         <me.zhanghai.android.materialprogressbar.MaterialProgressBar
             style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
@@ -67,19 +66,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:mpb_progressStyle="horizontal"
             app:mpb_useIntrinsicPadding="false" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="@{status == status.ERROR ? View.VISIBLE : View.GONE}"
-            android:background="@color/colorAccent"
-            android:text="@string/retry"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:onClick="@{() -> viewModel.fetchMoreNews()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,12 +10,15 @@ class Converters {
     companion object {
 
         @JvmStatic
-        fun dateTimeToRequiredFormatForList(dateTime: String): String {
+        fun dateTimeToRequiredFormatForList(dateTime: String?): String {
             return getAbbreviatedFromDateTime(dateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'", "dd MMM yyyy") ?: ""
         }
 
         @JvmStatic
-        private fun getAbbreviatedFromDateTime(dateTime: String, dateFormat: String, field: String): String? {
+        private fun getAbbreviatedFromDateTime(dateTime: String?, dateFormat: String, field: String): String? {
+            if(dateTime == null)
+                return null
+
             val input = SimpleDateFormat(dateFormat, Locale.US)
             val output = SimpleDateFormat(field, Locale.US)
             try {

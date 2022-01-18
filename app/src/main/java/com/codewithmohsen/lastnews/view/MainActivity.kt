@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         adapter = ItemListAdapter { item ->
-
+            DetailsActivity.startActivity(this, item)
         }
 
         binding.itemList.layoutManager = GridLayoutManager(this, 2)

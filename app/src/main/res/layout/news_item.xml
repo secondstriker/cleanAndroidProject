@@ -12,10 +12,6 @@
             type="com.codewithmohsen.lastnews.models.Article" />
 
     </data>
-    <!--
-    materialCardView has some problems to inflating in tests with espresso.
-    so do not use it.
-     -->
 
     <io.armcha.elasticview.ElasticView
     android:layout_width="match_parent"
@@ -53,29 +49,32 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:text="@{item.title}"
+                    android:textColor="@color/secondaryTextColor"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:textSize="14sp"
+                    android:layout_marginTop="@dimen/half_default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"/>
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{Converters.dateTimeToRequiredFormatForList(item.publishedAt)}"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:lines="1"
-                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                />
+                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_gravity="end|bottom"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:lines="3"
-                    android:text="@{item.title}"
-                    android:textColor="@color/secondaryTextColor"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:textSize="14sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </io.armcha.elasticview.ElasticView>

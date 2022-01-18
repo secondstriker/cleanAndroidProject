@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/ic_baseline_broken_image_24.xml" value="0.1078125" />
         <entry key="app/src/main/res/drawable/ic_drag_handle.xml" value="0.2171875" />
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.15942028985507245" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10960144927536232" />
         <entry key="app/src/main/res/layout/bottom_sheet_select_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/long_loading_cancel.xml" value="0.1644021739130435" />

@@ -17,7 +17,6 @@ import kotlinx.coroutines.Dispatchers
  */
 class ItemListAdapter(
     @DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
-    private val dataBindingComponent: DataBindingComponent,
     private val itemClickCallback: ((Article) -> Unit)?
 ) : DataBoundListAdapter<Article, NewsItemBinding>(
     defaultDispatcher,
@@ -47,9 +46,7 @@ class ItemListAdapter(
             LayoutInflater.from(parent.context),
             R.layout.news_item,
             parent,
-            false,
-            dataBindingComponent
-        )
+            false)
         binding.root.setOnClickListener { _ ->
             binding.item.let {
                 if(it != null) itemClickCallback?.invoke(it)

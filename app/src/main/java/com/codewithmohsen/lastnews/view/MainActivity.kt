@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingComponent
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -13,17 +12,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.adapter.ItemListAdapter
-import com.codewithmohsen.lastnews.binding.ActivityDataBindingComponent
 import com.codewithmohsen.lastnews.databinding.ActivityMainBinding
-import com.codewithmohsen.lastnews.databinding.BottomSheetSelectCategoryBinding
 import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.repository.Status
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
@@ -37,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ItemListAdapter
-    private var dataBindingComponent: DataBindingComponent = ActivityDataBindingComponent(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        adapter = ItemListAdapter(dataBindingComponent = dataBindingComponent) { item ->
+        adapter = ItemListAdapter() { item ->
 
         }
 

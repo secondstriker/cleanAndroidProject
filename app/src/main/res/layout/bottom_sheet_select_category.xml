@@ -35,13 +35,6 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <RadioButton
-                android:id="@+id/radio_all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/all"
-                android:tag="all" />
-
-            <RadioButton
                 android:id="@+id/radio_general"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

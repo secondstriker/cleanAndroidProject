@@ -15,7 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.adapter.ItemListAdapter
-import com.codewithmohsen.lastnews.databinding.ActivityMainBinding
+import com.codewithmohsen.lastnews.databinding.ActivityNewsListBinding
 import com.codewithmohsen.lastnews.models.Category
 import com.codewithmohsen.lastnews.repository.Status
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
@@ -24,18 +24,18 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class NewsListActivity : AppCompatActivity() {
 
     private val job: Job = Job()
 
     private val viewModel: NewsListViewModel by viewModels()
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityNewsListBinding
     private lateinit var adapter: ItemListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_news_list)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

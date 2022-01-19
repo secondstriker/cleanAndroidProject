@@ -15,7 +15,7 @@
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.LastNewsApp">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.NewsListActivity"
             android:exported="true">
         </activity>
         <activity

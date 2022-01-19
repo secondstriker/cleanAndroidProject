@@ -18,7 +18,7 @@ class SplashActivity: AppCompatActivity() {
         //we could add a bitmap like the sample project text with a layer-list view and put it in theme,
         //instead of using this activity
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, NewsListActivity::class.java))
         }, 2000)
     }
 }

@@ -15,4 +15,5 @@
     <string name="you_may_want_to_cancel_or_change_your_network">You may want to cancel or change your network</string>
     <string name="cancel">Cancel</string>
     <string name="share">Share</string>
+    <string name="sample_project">Sample\nProject</string>
 </resources>

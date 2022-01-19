@@ -1,12 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.codewithmohsen.lastnews.view.MainActivity">
+    tools:context="com.codewithmohsen.lastnews.view.DetailsActivity">
 
     <item
-        android:id="@+id/action_filter"
+        android:id="@+id/action_share"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_baseline_filter_list_24"
-        android:title="@string/filter"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="@string/share"
         app:showAsAction="always" />
 </menu>

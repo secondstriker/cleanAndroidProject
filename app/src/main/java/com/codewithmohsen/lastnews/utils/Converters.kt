@@ -15,6 +15,11 @@ class Converters {
         }
 
         @JvmStatic
+        fun dateTimeToRequiredFormatForDetail(dateTime: String?): String {
+            return getAbbreviatedFromDateTime(dateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'", "HH:mm - dd MMM yyyy") ?: ""
+        }
+
+        @JvmStatic
         private fun getAbbreviatedFromDateTime(dateTime: String?, dateFormat: String, field: String): String? {
             if(dateTime == null)
                 return null

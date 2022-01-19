@@ -3,8 +3,11 @@ package com.codewithmohsen.lastnews.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.databinding.ActivityDetailsBinding
@@ -38,6 +41,29 @@ class DetailsActivity: AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_details, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_share -> {
+                share()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun share() {
+        ShareCompat.IntentBuilder(this)
+            .setType("text/plain")
+            .setChooserTitle("Share URL")
+            .setText("${binding.item?.title}\n${binding.item?.url}")
+            .startChooser()
+    }
 
 
     companion object {

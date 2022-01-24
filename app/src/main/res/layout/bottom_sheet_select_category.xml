@@ -43,7 +43,8 @@
                 android:checked="true"
                 android:text="@string/general"
                 android:tag="general"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/radio_business"
@@ -51,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/business"
                 android:tag="business"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/radio_entertainment"
@@ -59,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/entertainment"
                 android:tag="entertainment"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/radio_health"
@@ -67,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/health"
                 android:tag="health"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/radio_science"
@@ -75,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/science"
                 android:tag="science"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/radio_sports"
@@ -83,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sports"
                 android:tag="sports"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/radio_technology"
@@ -91,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/technology"
                 android:tag="technology"
-                android:textSize="@dimen/font_16sp"/>
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/black"/>
 
         </RadioGroup>
 

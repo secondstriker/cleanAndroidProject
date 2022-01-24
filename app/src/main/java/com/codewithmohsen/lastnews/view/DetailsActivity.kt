@@ -33,6 +33,9 @@ class DetailsActivity: AppCompatActivity() {
             Timber.d("Article from intent: $article")
             viewModel.setArticle(article)
         }
+        else {
+            Timber.d("Article from savedInstanceState ${viewModel.article.value}")
+        }
 
         viewModel.article.observe(this) { article ->
             Timber.d("Article form liveData: $article")

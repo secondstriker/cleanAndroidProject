@@ -2,10 +2,10 @@ package com.codewithmohsen.lastnews.repository
 
 
 /**
- * A generic class that holds a value with its loading status.
+ * A generic class that holds a value with its status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val messageResource: Int?) {
     companion object {
 
         @JvmStatic
@@ -13,8 +13,12 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
             return Resource(Status.SUCCESS, data, null)
         }
         @JvmStatic
-        fun <T> error(msg: String?, data: T?): Resource<T> {
+        fun <T> error(msg: Int, data: T?): Resource<T> {
             return Resource(Status.ERROR, data, msg)
+        }
+        @JvmStatic
+        fun <T> networkError(msg: Int, data: T?): Resource<T> {
+            return Resource(Status.NETWORK_ERROR, data, msg)
         }
         @JvmStatic
         fun <T> loading(data: T?): Resource<T> {

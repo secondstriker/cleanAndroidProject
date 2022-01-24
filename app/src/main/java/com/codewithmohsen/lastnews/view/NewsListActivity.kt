@@ -21,6 +21,7 @@ import com.codewithmohsen.lastnews.repository.Status
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
+import com.google.android.material.snackbar.Snackbar
 
 
 @AndroidEntryPoint
@@ -51,9 +52,34 @@ class NewsListActivity : AppCompatActivity() {
                 viewModel.getNewsAsFlow().collect { resource ->
                     adapter.submitList(resource.data)
                     binding.status = resource.status
-                    if(binding.swipeRefresh.isRefreshing)
+                    binding.hasData = !resource.data.isNullOrEmpty()
+                    Timber.d("data is ${binding.hasData}")
+
+                    if (binding.swipeRefresh.isRefreshing) {
+                        Timber.d("result = isRefreshing")
                         binding.swipeRefresh.isRefreshing = Status.LOADING == resource.status
-                            || Status.LONG_LOADING == resource.status
+                                || Status.LONG_LOADING == resource.status
+                    }
+                    else {
+                        Timber.d("result = is Not Refreshing")
+                        binding.swipeRefresh.isRefreshing = resource.data.isNullOrEmpty() &&
+                                Status.LOADING == resource.status
+                                || Status.LONG_LOADING == resource.status
+                    }
+
+                    if (resource.status == Status.ERROR && resource.messageResource != null) {
+                        Snackbar.make(binding.root, resources.getString(resource.messageResource),
+                            Snackbar.LENGTH_LONG).also { snackBar ->
+                            snackBar.setAction(resources.getString(R.string.yes)) {
+                                viewModel.refresh()
+                                snackBar.dismiss()
+                            }
+                        }.show()
+                    }
+
+                    if(resource.status == Status.NETWORK_ERROR && resource.messageResource != null)
+                        Snackbar.make(binding.root, resources.getString(resource.messageResource),
+                            Snackbar.LENGTH_LONG).show()
                 }
             }
         }
@@ -61,7 +87,7 @@ class NewsListActivity : AppCompatActivity() {
         viewModel.fetchNews(category = Category.general)
 
         binding.itemList.addOnScrollListener(object :
-            EndlessRecyclerOnScrollListener(binding.itemList.layoutManager!!,0){
+            EndlessRecyclerOnScrollListener(binding.itemList.layoutManager!!, 0) {
             override fun onLoadMore() {
                 Timber.d("fetch more")
                 viewModel.fetchMoreNews()
@@ -86,7 +112,8 @@ class NewsListActivity : AppCompatActivity() {
 
         return when (item.itemId) {
             R.id.action_filter -> {
-                SelectCategoryDialogFragment.newInstance().show(supportFragmentManager, this::class.java.name)
+                SelectCategoryDialogFragment.newInstance()
+                    .show(supportFragmentManager, this::class.java.name)
                 true
             }
             else -> super.onOptionsItemSelected(item)

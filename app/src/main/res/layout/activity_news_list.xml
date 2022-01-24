@@ -14,6 +14,10 @@
             type="com.codewithmohsen.lastnews.repository.Status" />
 
         <variable
+            name="hasData"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.codewithmohsen.lastnews.vm.NewsListViewModel" />
 
@@ -53,14 +57,15 @@
             android:layout_marginTop="80dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:status="@{status}" />
+            app:status="@{status}"
+            app:hasData="@{hasData}"/>
 
         <me.zhanghai.android.materialprogressbar.MaterialProgressBar
             style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:indeterminate="true"
-            android:visibility="@{status == Status.LOADING || status == Status.LONG_LOADING ? View.VISIBLE : View.GONE}"
+            android:visibility="@{hasData == true &amp;&amp; (status == Status.LOADING || status == Status.LONG_LOADING) ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

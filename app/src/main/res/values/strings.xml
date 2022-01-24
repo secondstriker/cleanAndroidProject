@@ -15,5 +15,11 @@
     <string name="you_may_want_to_cancel_or_change_your_network">You may want to cancel or change your network</string>
     <string name="cancel">Cancel</string>
     <string name="share">Share</string>
-    <string name="sample_project">Sample\nProject</string>
+    <string name="sample_project">Last\nNews</string>
+    <string name="api_error">Api error, do you want to refresh?</string>
+    <string name="server_error">Server error, do you want to refresh?</string>
+    <string name="network_error">Network error, please make sure the network is OK.</string>
+    <string name="unknown_error">Unknown error, do you want to refresh?</string>
+    <string name="yes">Yes</string>
+
 </resources>

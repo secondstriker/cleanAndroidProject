@@ -11,6 +11,7 @@ package com.codewithmohsen.lastnews.repository
 enum class Status {
     SUCCESS,
     ERROR,
+    NETWORK_ERROR,
     LOADING,
     LONG_LOADING,
     CANCEL

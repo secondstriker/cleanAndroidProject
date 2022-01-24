@@ -1,6 +1,7 @@
 package com.codewithmohsen.lastnews.repository
 
 import com.codewithmohsen.lastnews.Config.LONG_LOADING_THRESHOLD
+import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.api.APIErrorResponse
 import com.codewithmohsen.lastnews.api.ErrorModel
 import com.codewithmohsen.lastnews.api.NetworkResponse
@@ -9,7 +10,6 @@ import com.codewithmohsen.lastnews.di.IoDispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
-import kotlin.coroutines.coroutineContext
 
 abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
     @ApplicationScope private val externalCoroutineScope: CoroutineScope,
@@ -50,43 +50,56 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
             is NetworkResponse.APIError -> {
                 when (result.apiErrorResponse) {
                     is APIErrorResponse.ClientErrorResponse -> {
+                        //
+                        Timber.d("APIErrorResponse.ClientErrorResponse, " +
+                                "the error is ${result.apiErrorResponse.error.message}")
                         setErrorValue(
-                            result.apiErrorResponse.error.message,
-                            null
+                            R.string.api_error,
+                            _result.value.data
                         )
                     }
                     is APIErrorResponse.ServerErrorResponse -> {
+                        Timber.d("APIErrorResponse.ServerErrorResponse, " +
+                                "the error is ${result.apiErrorResponse.error.message}")
                         setErrorValue(
-                            result.apiErrorResponse.error.message,
-                            null
+                            R.string.server_error,
+                            _result.value.data
                         )
                     }
                     is APIErrorResponse.Unauthenticated -> {
+                        Timber.d("APIErrorResponse.Unauthenticated, " +
+                                "the error is ${result.apiErrorResponse.error.message}")
                         setErrorValue(
-                            result.apiErrorResponse.error.message,
-                            null
+                            R.string.unknown_error,
+                            _result.value.data
                         )
                     }
                     is APIErrorResponse.UnexpectedErrorResponse -> {
+                        Timber.d("APIErrorResponse.UnexpectedErrorResponse, " +
+                                "the error is ${result.apiErrorResponse.error.message}")
                         setErrorValue(
-                            result.apiErrorResponse.error.message,
-                            null
+                           R.string.unknown_error,
+                            _result.value.data
                         )
                     }
                 }
 
             }
             is NetworkResponse.Empty -> {
+                Timber.d("NetworkResponse.Empty, the result is ${result.body}")
                 setValue(Resource.success(bodyToResult(result.body)))
             }
             is NetworkResponse.NetworkError -> {
-                setValue(Resource.error(result.exception.message, null))
+                Timber.d("NetworkResponse.NetworkError, the error is ${result.exception.message}")
+                setValue(Resource.networkError(R.string.network_error, _result.value.data))
             }
             is NetworkResponse.Success -> {
+                Timber.d("NetworkResponse.Success, the result is ${result.body}")
                 setValue(Resource.success(bodyToResult(result.body)))
             }
             is NetworkResponse.UnknownError -> {
-                setValue(Resource.error(result.throwable?.message, null))
+                Timber.d("NetworkResponse.UnknownError, the error is ${result.throwable?.message}")
+                setErrorValue(R.string.unknown_error, _result.value.data)
             }
         }
     }
@@ -95,8 +108,8 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
         _result.emit(resource)
     }
 
-    private suspend fun setErrorValue(message: String?, data: ResultModel?) {
-        _result.emit(Resource.error(message, data))
+    private suspend fun setErrorValue(messageResource: Int, data: ResultModel?) {
+        _result.emit(Resource.error(messageResource, data))
     }
 
     private suspend fun longLoading() = withContext(ioDispatcher) {

@@ -7,4 +7,13 @@
     <dimen name="triple_default_margin">24dp</dimen>
     <dimen name="half_default_margin">4dp</dimen>
     <dimen name="large_image_height">300dp</dimen>
+    <dimen name="font_24sp">24sp</dimen>
+    <dimen name="cancel_container_top_margin">80dp</dimen>
+    <dimen name="progressbar_height">4dp</dimen>
+    <dimen name="font_16sp">16sp</dimen>
+    <dimen name="news_image_height">200dp</dimen>
+    <dimen name="font_14sp">14sp</dimen>
+    <dimen name="font_13sp">13sp</dimen>
+    <dimen name="detail_news_image_height">400dp</dimen>
+    <dimen name="font_15sp">15sp</dimen>
 </resources>

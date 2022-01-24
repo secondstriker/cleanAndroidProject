@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">آخرین اخبار</string>
+    <string name="image_of_the_article_or_news">عکس مقاله یا خبر</string>
+    <string name="title">عنوان</string>
+    <string name="filter">پالایه</string>
+    <string name="general">عمومی</string>
+    <string name="business">تجاری</string>
+    <string name="entertainment">سرگرمی</string>
+    <string name="health">سلامت</string>
+    <string name="science">علمی</string>
+    <string name="sports">ورزشی</string>
+    <string name="technology">تکنولوژی</string>
+    <string name="you_may_want_to_cancel_or_change_your_network">نت شما خیلی کند است. می توانید بی خیال شوید یا شبکه دیگری را امتحان کنید.</string>
+    <string name="cancel">بی خیال</string>
+    <string name="share">اشتراک گذاری</string>
+    <string name="latest_news">آخرین\nاخبار</string>
+    <string name="api_error">خطای ای پی آی، آیا می خواهید مجدداْ بارگذاری شود؟</string>
+    <string name="server_error">خطای سرویس دهنده، آیا می خواهید مجدداْ بارگذاری شود؟</string>
+    <string name="network_error">خطای شبکه، لطفاْ شبکه خود را بررسی نمایید.</string>
+    <string name="unknown_error">خطای ناشناس، آیا می خواهید مجدداْ بارگذاری شود؟</string>
+    <string name="yes">بله</string>
+
+</resources>

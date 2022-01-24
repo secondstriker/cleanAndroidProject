@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="@dimen/detail_news_image_height"
                 android:adjustViewBounds="false"
                 android:background="@color/cardview_shadow_end_color"
                 android:contentDescription="@string/image_of_the_article_or_news"
@@ -48,7 +48,7 @@
                 android:lines="1"
                 android:text="@{Converters.dateTimeToRequiredFormatForDetail(item.publishedAt)}"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="16sp"
+                android:textSize="@dimen/font_16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView" />
 
@@ -63,7 +63,7 @@
                 android:visibility="@{item.author != null &amp;&amp; !item.author.isEmpty() ? View.VISIBLE : View.GONE}"
                 android:text="@{item.author}"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="16sp"
+                android:textSize="@dimen/font_16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/publishedDate" />
 
@@ -77,7 +77,7 @@
                 android:lines="1"
                 android:text="@{item.source.name}"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="16sp"
+                android:textSize="@dimen/font_16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/author" />
 
@@ -92,7 +92,7 @@
                 android:lines="2"
                 android:text="@{item.title}"
                 android:textColor="@color/secondaryTextColor"
-                android:textSize="15sp"
+                android:textSize="@dimen/font_15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/source" />
 
@@ -107,7 +107,7 @@
                 android:layout_marginBottom="@dimen/double_default_margin"
                 android:text="@{item.content != null &amp;&amp; !item.content.isEmpty() ? item.content : item.description}"
                 android:textColor="@color/secondaryTextColor"
-                android:textSize="14sp"
+                android:textSize="@dimen/font_14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
 

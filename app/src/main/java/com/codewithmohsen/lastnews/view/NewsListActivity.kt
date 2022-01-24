@@ -56,12 +56,12 @@ class NewsListActivity : AppCompatActivity() {
                     Timber.d("data is ${binding.hasData}")
 
                     if (binding.swipeRefresh.isRefreshing) {
-                        Timber.d("result = isRefreshing")
+                        Timber.d("binding.swipeRefresh isRefreshing")
                         binding.swipeRefresh.isRefreshing = Status.LOADING == resource.status
                                 || Status.LONG_LOADING == resource.status
                     }
                     else {
-                        Timber.d("result = is Not Refreshing")
+                        Timber.d("binding.swipeRefresh is Not Refreshing")
                         binding.swipeRefresh.isRefreshing = resource.data.isNullOrEmpty() &&
                                 Status.LOADING == resource.status
                                 || Status.LONG_LOADING == resource.status

@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">Last News App</string>
+    <string name="app_name">Latest News</string>
     <string name="image_of_the_article_or_news">image of the article or news</string>
     <string name="title">Title</string>
-    <string name="retry">Retry</string>
     <string name="filter">Filter</string>
     <string name="general">General</string>
-    <string name="all">All</string>
     <string name="business">Business</string>
     <string name="entertainment">Entertainment</string>
     <string name="health">Health</string>
@@ -15,7 +13,7 @@
     <string name="you_may_want_to_cancel_or_change_your_network">You may want to cancel or change your network</string>
     <string name="cancel">Cancel</string>
     <string name="share">Share</string>
-    <string name="sample_project">Last\nNews</string>
+    <string name="latest_news">Latest\nNews</string>
     <string name="api_error">Api error, do you want to refresh?</string>
     <string name="server_error">Server error, do you want to refresh?</string>
     <string name="network_error">Network error, please make sure the network is OK.</string>

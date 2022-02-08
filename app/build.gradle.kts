@@ -44,7 +44,6 @@ dependencies {
     implementation(DependenciesPlugin.AndroidxCore)
     implementation(DependenciesPlugin.Material)
     implementation(DependenciesPlugin.AndroidxAppCompat)
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     androidTestImplementation(DependenciesPlugin.AndroidxJUnit)
     androidTestImplementation(DependenciesPlugin.AndroidxEspresso)
 

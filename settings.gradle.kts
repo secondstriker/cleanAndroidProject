@@ -6,7 +6,6 @@ pluginManagement {
     }
 }
 rootProject.name = "Last News App"
-//DataLayer
 include(":app")
 
 //For dependency management, we use a gradle plugin
